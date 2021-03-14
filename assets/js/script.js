@@ -53,17 +53,13 @@ $("document").ready(function(){
     $(".hour-row").each(function(){
         for(let i = 0; i < retrievedTaskList.length; i++){
             if($(this).attr("id") == retrievedTaskList[i].hour){
-                let taskText = $(this).prev(".task-block").val() 
-                taskText = retrievedTaskList[i].task
-                $(".hour-row").child(".task-block").append(taskText)
-                // console.log(retrievedTaskList[i].hour)
-                // console.log($(this).attr("id"))
-                // console.log(retrievedTaskList[i].task)
-            }
-        }
-        
-        
-    })
-    console.log(retrievedTaskList)
+                let taskText = $(this).prev(".task-block").val(); 
+                let taskContainer = $("<div>");                
+                taskText = retrievedTaskList[i].task;
+                $(this).children("textarea").append(taskText)
+            };
+        };
+    });
+    
 })
 
