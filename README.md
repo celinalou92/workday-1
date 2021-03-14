@@ -11,7 +11,7 @@ A timed quiz app that will deduct 10 seconds from your score every time you get 
 * Moment.js
 
 ## Screenshot of Site
-![Code Quiz Screengrab](screengrab-codeQuiz_.png)
+![Work Day Screengrab](workday_screengrab.png)
 
 ## Website
 https://celinalou92.github.io/workday-1/
