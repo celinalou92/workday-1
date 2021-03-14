@@ -5,28 +5,35 @@ $("document").ready(function(){
     // display current day and time in p with #currentDay
         $("#currentDay").text(moment().format("dddd, MMMM Do YYYY"))
     // save current time in a moment object 
-    // let currentTime = moment().format("H");
-    let currentTime = 12;
+    let currentTime = moment().format("H");
+    // let currentTime = 12;
     console.log(`the current time is ${currentTime}`)
 
     
-    // select col and add class based on the time
-    $(".task-block").each(function(){
-        let timeId = $(this).parent().attr("id")
-        console.log(timeId)
-        if(timeId > currentTime){
-            // add class .future for future hours
-            $(this).addClass("future")
-        } else if ( timeId == currentTime) {
-            // add class .present for current hour
-            $(this).addClass("present") 
-        } else {
-            // add class .past for past events
-            $(this).addClass("past")
-        }
-    })
-    // Question: How does this get re-evaluted? on page refresh?
-    // Question: it doesn't seem like moment returns a number? does it return a string? === does not work .... can I parseInt??
+    function auditTask(){
+        // select col and add class based on the time
+        $(".task-block").each(function(){
+            let timeId = $(this).parent().attr("id")
+            console.log(timeId)
+            if(timeId > currentTime){
+                // add class .future for future hours
+                $(this).addClass("future")
+            } else if ( timeId == currentTime) {
+                // add class .present for current hour
+                $(this).addClass("present") 
+            } else {
+                // add class .past for past events
+                $(this).addClass("past")
+            }
+        });
+    }
+    
+
+    // reaudit the time values every 30mins
+    setInterval(function(){
+        auditTask()
+    }, (1000 *60) * 10)
+
        
     // click function to add tasks
     $(".hour-row").on("click", ".saveBtn", function(){
@@ -60,6 +67,7 @@ $("document").ready(function(){
             };
         };
     });
-    
+
+    auditTask()
 })
 
