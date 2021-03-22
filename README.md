@@ -1,7 +1,7 @@
 # Work Day Scheduler
 
 ## Purpose
-A timed quiz app that will deduct 10 seconds from your score every time you get a question wrong
+A daily planner that to help with time management
 
 ## Built With
 * HTML

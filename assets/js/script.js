@@ -1,11 +1,11 @@
 let taskList = JSON.parse(localStorage.getItem('taskList')) || [];
-let retrievedTaskList = JSON.parse(localStorage.getItem("taskList", taskList));
+
 
 $("document").ready(function(){
     // display current day and time in p with #currentDay
         $("#currentDay").text(moment().format("dddd, MMMM Do YYYY"))
     // save current time in a moment object 
-    let currentTime = moment().format("H");
+    let currentTime = Number(moment().format("H"));
     // let currentTime = 12;
     console.log(`the current time is ${currentTime}`)
 
@@ -49,8 +49,32 @@ $("document").ready(function(){
             hour: hourId,
             task: textInput
         }
-        // push object into the array
-        taskList.push(taskOb)
+        
+        // value to track curent index
+        let indexToChange;
+        // check if the hour block is already in the array
+        let valueExist = false;
+
+        for(let i = 0; i < taskList.length; i++){
+            let taskEl = taskList[i];
+            console.log(taskEl)
+            // if hour block is in the array
+            if(taskEl.hour == hourId) {
+                // set the index we are changing to current index
+                indexToChange = i
+                valueExist = true;
+                break;
+            };
+        };
+        // if item exists in array 
+        if(valueExist){
+            // change the value of the index if the value exists to new task 
+            taskList[indexToChange] = taskOb;
+        } else {
+            // push object into the array
+            taskList.push(taskOb)
+        }
+        
         console.log(taskList)
         localStorage.setItem("taskList", JSON.stringify(taskList));
         // take in that input and save it to localStorage
@@ -58,11 +82,11 @@ $("document").ready(function(){
     });
         
     $(".hour-row").each(function(){
-        for(let i = 0; i < retrievedTaskList.length; i++){
-            if($(this).attr("id") == retrievedTaskList[i].hour){
+        for(let i = 0; i < taskList.length; i++){
+            if($(this).attr("id") == taskList[i].hour){
                 let taskText = $(this).prev(".task-block").val(); 
                 let taskContainer = $("<div>");                
-                taskText = retrievedTaskList[i].task;
+                taskText = taskList[i].task;
                 $(this).children("textarea").append(taskText)
             };
         };
